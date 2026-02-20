@@ -115,32 +115,116 @@ Load balancing services provided by cloud platforms.
 
 ## 5. Load Balancing Algorithms
 
-Load balancers use algorithms to decide how incoming traffic should be distributed.
+Load balancers use different algorithms to decide **which server should handle an incoming client request**.
+
+These algorithms help distribute traffic efficiently across multiple backend servers.
+
+---
 
 ### 🔹 Round Robin
 
-Requests are distributed sequentially across all available servers.
+In the **Round Robin** algorithm, requests are distributed to servers in a fixed sequential order.
 
-* **Advantage:** Simple implementation
-* **Limitation:** Does not consider server capacity or current load
+### Example:
+
+Assume you have 3 servers:
+
+* Server A
+* Server B
+* Server C
+
+Incoming requests will be handled as follows:
+
+```
+Request 1 → Server A
+Request 2 → Server B
+Request 3 → Server C
+Request 4 → Server A
+Request 5 → Server B
+Request 6 → Server C
+```
+
+Each server gets an equal number of requests in rotation.
+
+**Advantage:**
+
+* Simple to implement
+* Works well when all servers have similar capacity
+
+**Limitation:**
+
+* Does not consider server load or performance
+* A busy server may still receive new requests
 
 ---
 
 ### 🔹 Least Connections
 
-Requests are sent to the server with the fewest active connections.
+In the **Least Connections** algorithm, the load balancer sends the incoming request to the server that currently has the **fewest active connections**.
 
-* **Advantage:** Efficient load distribution
-* **Limitation:** May lead to imbalance if misconfigured
+### Example:
+
+```
+Server A → 10 active connections
+Server B → 4 active connections
+Server C → 7 active connections
+```
+
+Next request will go to:
+
+```
+Server B
+```
+
+Because it is handling the least number of users at that moment.
+
+**Advantage:**
+
+* More efficient distribution of traffic
+* Suitable when servers have varying workloads
+
+**Limitation:**
+
+* Requires real-time monitoring
+* May cause imbalance if connection time varies significantly
 
 ---
 
 ### 🔹 IP Hash
 
-Traffic is distributed based on the client’s IP address.
+In the **IP Hash** algorithm, the client's IP address is used to determine which server will handle the request.
 
-* **Advantage:** Same client consistently connects to the same server
-* **Limitation:** Uneven distribution if traffic is not uniform
+This ensures that the same client is consistently directed to the same server.
+
+### Example:
+
+```
+Client IP: 192.168.1.1 → Server A
+Client IP: 192.168.1.2 → Server B
+Client IP: 192.168.1.1 → Server A (again)
+```
+
+This is useful for maintaining user sessions (e.g., logged-in users).
+
+**Advantage:**
+
+* Maintains session consistency
+* Useful for stateful applications
+
+**Limitation:**
+
+* Uneven load distribution if traffic from certain IPs is higher
+
+---
+
+**Real-World Usage:**
+
+In real-world projects, developers use tools like Nginx or PM2 Cluster Mode to implement load balancing for backend servers.
+
+When deploying applications on cloud platforms, managed services like AWS Application Load Balancer or GCP Cloud Load Balancing are commonly used.
+
+These tools automatically distribute incoming requests across multiple server instances.
+This helps prevent server overload and ensures better performance and availability.
 
 ---
 
