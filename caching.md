@@ -86,20 +86,10 @@ Cache stored on disk storage.
 
 ---
 
-Caching in Real World – Instagram Example
+## 5. Caching in Real World – Instagram Example
 
 When you open Instagram, a lot of data loads:
-
-Profile pictures
-
-Posts
-
-Reels
-
-Comments
-
-Followers count
-
+Profile pictures,Posts,Reels,Comments,Followers count
 If Instagram fetched this from the database every time → it would be very slow.
 
 So caching is used.
@@ -109,13 +99,11 @@ So caching is used.
 Suppose:
 
 You open a popular celebrity’s profile.
-
 Millions of users are requesting:
 
 Followers count
 Profile info
 Recent posts
-
 
 Instead of:
 
@@ -123,9 +111,7 @@ App → Database → Send data
 
 
 Instagram does this:
-
 App → Server → Check Memory Cache (Redis)
-
 
 If data exists:
 
@@ -141,17 +127,12 @@ So here:
 🔹 2. Disk Cache (Client-Side Storage)
 
 Now suppose:
-
 You open a reel or someone’s profile picture.
 
 Instagram:
-
 Downloads the image/video once
-
 Stores it on your phone storage
-
 Next time:
-
 You open same profile again
 
 
@@ -163,12 +144,11 @@ Your phone’s disk storage (cache)
 That’s why:
 
 Profile pictures load instantly
-
 Previously viewed reels open faster
 
 RAM is used to store frequently accessed data because it is fast but has limited storage, while disk storage is used for large data like images and videos since it has more space but is slower.
 
-## 5. Cache Hit and Cache Miss
+## 6. Cache Hit and Cache Miss
 
 ### Cache Hit
 
@@ -197,7 +177,7 @@ Efficient caching improves system performance and reduces backend workload.
 
 ---
 
-## 6. Cache Eviction Policies
+## 7. Cache Eviction Policies
 
 Since cache has limited capacity, older or less useful data must be removed when full.
 This process is known as **Cache Eviction**.
@@ -240,7 +220,7 @@ Removes data not accessed recently.
 
 ---
 
-## 7. Challenges of Caching
+## 8. Challenges of Caching
 
 ### 🔸 Staleness
 
@@ -282,7 +262,7 @@ Different users see different values → this is Consistency issue
 Staleness: Cache is outdated
 Consistency: Data is different across system components
 
-## 8. Summary
+## 9. Summary
 
 Caching:
 
