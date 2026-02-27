@@ -232,6 +232,36 @@ In a social media application:
 
 ---
 
+How Server Stores Data in Shared Storage
+
+🔄 Flow
+User Upload
+     ↓
+Frontend (React)
+     ↓
+Server (Node.js / Express)
+     ↓
+Shared Storage (AWS S3 / Cloud Storage)
+     ↓
+File URL returned
+     ↓
+URL saved in Database (MongoDB)
+
+🛠️ What We Use
+Backend: Node.js + Express
+File handling: Multer (upload middleware)
+
+Shared Storage:
+
+AWS S3 ✅ (most common)
+Google Cloud Storage
+Azure Blob Storage
+Database: MongoDB (stores file URL, not file)
+
+🎯 Short Meaning
+
+The server receives the uploaded file, sends it to shared storage using a storage SDK/API (like AWS S3), and saves the returned file URL in the database for future access.
+
 # 6️⃣ Interview Summary
 
 > A scalable web architecture uses load balancers to distribute traffic, multiple application servers for horizontal scaling, caching for performance optimization, database replication for read scalability, and shared storage for large static assets. This design ensures high availability, performance, and reliability in distributed systems.
