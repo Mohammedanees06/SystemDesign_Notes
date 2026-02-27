@@ -281,6 +281,8 @@ Indexing is like creating a tree structure that organizes data into branches bas
 Each branch helps narrow down where the data exists instead of searching everything.
 When data is added or deleted, the tree must also be updated by adding or removing branches so the structure continues to point to the correct records.
 
+Index = searchable tree; data change = tree update.
+
 ---
 
 ## ✅ Advantages of Indexing
