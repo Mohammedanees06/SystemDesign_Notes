@@ -189,6 +189,24 @@ Often implemented using cloud storage services.
 
 ---
 
+🖥️ Can One Server Access Another Server’s Data?
+
+🔹 Technically — Possible
+A server can request data from another server through network APIs.
+
+But…
+
+🔹 Architecturally — Not Recommended ❌
+
+In scalable systems, servers are designed to be independent.
+Each server should not depend on another server’s local files because:
+Creates tight coupling
+Slows the system
+Causes failures if one server goes down
+Makes scaling difficult
+
+The server handles incoming requests and uploads files to shared storage, while storing only the file reference (URL) in the database. Shared storage keeps large files accessible to all servers.
+
 # 4️⃣ Why This Architecture Is Used
 
 This architecture ensures:
