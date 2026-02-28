@@ -1,6 +1,7 @@
 ⚖️ CAP Theorem in System Design
 
 The CAP Theorem explains the fundamental trade-offs that distributed systems must make between Consistency, Availability, and Partition Tolerance.
+
 It states that a distributed system can guarantee only two out of the three properties at the same time.
 
 📘 What is CAP Theorem?
@@ -10,19 +11,25 @@ In a distributed system, it is impossible to simultaneously achieve Consistency,
 When a network partition occurs, the system must choose between consistency and availability.
 
 A network issue (network partition) occurs when servers in a distributed system cannot communicate with each other due to connection failures such as network outages, latency problems, or broken links.
+
 The servers are still running, but data exchange between them temporarily stops.
-This causes each server (node) to operate independently until the connection is restored.
+
+Each server (node) operates independently until the connection is restored.
 
 🧩 The Three Properties
 
 C — Consistency → all servers show same latest data
+
 A — Availability → every request gets a response
+
 P — Partition Tolerance → system keeps working even if network breaks
 
 🔹 Consistency (C)
 
 All servers return the same and latest data at any given time.
+
 Every read receives the most recent write.
+
 No stale or outdated data is returned.
 
 Example:
@@ -31,7 +38,9 @@ After updating your profile, every user immediately sees the updated information
 🔹 Availability (A)
 
 Every request receives a response, even if some servers are failing.
+
 System always responds.
+
 Response may not contain the latest data.
 
 Example:
@@ -40,31 +49,41 @@ Website always loads, even during server issues.
 🔹 Partition Tolerance (P)
 
 The system continues operating even when communication between servers is broken.
+
 Network failures are tolerated.
+
 Nodes may not communicate temporarily.
 
 Example:
 Servers in different regions lose connection but continue functioning independently.
 
 🔄 Why Partition Tolerance is Mandatory
+
 In real distributed systems, network failures are unavoidable.
 
 Therefore:
+
 Modern distributed systems must always tolerate partitions (P).
 
-Partition Tolerance means the system continues running even when servers cannot communicate due to a network failure.
-It keeps servers operational so the system can choose Consistency (reject requests) or Availability (serve requests).
-If partition tolerance is not supported, a network failure would cause the entire system to shut down because nodes cannot coordinate safely.
-It is mandatory in distributed systems since network failures are unavoidable in real-world environments.
+Partition Tolerance means:
 
-The real trade-off becomes:
+The system continues running even when servers cannot communicate due to a network failure.
 
+Servers remain operational so the system can choose Consistency (reject requests) or Availability (serve requests).
+
+Without partition tolerance, a network failure would shut down the entire system because nodes cannot coordinate safely.
+
+It is mandatory because network failures are unavoidable in real-world environments.
+
+Real Trade-off
 Consistency  vs  Availability
 ⚖️ CAP Combinations
 ✅ CP (Consistency + Partition Tolerance)
 
 System prioritizes correct data over availability.
+
 Some requests may fail or wait.
+
 Ensures strong data accuracy.
 
 Examples:
@@ -73,7 +92,9 @@ Banking systems, distributed databases requiring strict correctness.
 ✅ AP (Availability + Partition Tolerance)
 
 System prioritizes availability over immediate consistency.
+
 Always responds.
+
 Data may temporarily differ across nodes.
 
 Examples:
@@ -85,37 +106,26 @@ Possible only when no network partition exists.
 
 Not realistic for distributed systems.
 
-📊 CAP Triangle Concept
-        Consistency
-           /\
-          /  \
-         /    \
-        /      \
-Availability —— Partition Tolerance
-
-You can fully guarantee only two during failures.
-
 📱 Real-World Examples
-
-| System Type      | CAP Choice | Reason                         |
-|------------------|------------|--------------------------------|
-| Banking Systems  | CP         | Data accuracy is critical      |
-| Social Media     | AP         | Always available experience    |
-| Single Server DB | CA         | No network partition           |
-
+System Type	CAP Choice	Reason
+Banking Systems	CP	Data accuracy is critical
+Social Media	AP	Always available experience
+Single Server DB	CA	No network partition
 🧠 What Partition Tolerance REALLY Means
 
 Partition tolerance does NOT mean servers can communicate.
+
 It means the system keeps running even when communication is broken.
 
 Network Partition = network split
 Server A   ❌ network ❌   Server B
 
-Servers are alive, but connection between them failed.
+Servers are alive, but the connection between them failed.
 
 Partition tolerance means:
 
 ✅ servers don’t crash
+
 ✅ system keeps operating in some way
 
 Property Behavior During Partition
@@ -146,10 +156,10 @@ Now you try withdrawing money in Mumbai.
 ⚖️ Bank’s Decision (CP System)
 
 Bank says:
+
 “We must NEVER show wrong balance.”
 
-So what do they do?
-They STOP availability temporarily.
+So they stop availability temporarily.
 
 Mumbai server responds:
 
@@ -158,24 +168,32 @@ Transaction unavailable. Try later.
 
 Important insight:
 
-👉 Consistency is preserved by REFUSING operations, not by syncing.
+👉 Consistency is preserved by refusing operations, not by syncing.
+
 They do NOT allow risky updates.
 
 So:
+
 No new withdrawals allowed
+
 No conflicting data created
+
 Data stays correct everywhere
+
 Consistency achieved by blocking writes.
 
 ⚠️ Important Insight
 
 CAP applies only during network partitions.
+
 When the network is healthy, systems can achieve all three properties.
 
 🎯 Key Takeaway
 
 During network failures, distributed systems must choose between:
+
 returning correct data (Consistency), or
+
 always responding (Availability).
 
 ⭐ Simple Memory Line
