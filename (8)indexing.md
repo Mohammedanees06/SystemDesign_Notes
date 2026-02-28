@@ -272,8 +272,6 @@ Hash index = super-fast shortcut for exact value search.
 
 How Indexes Stay Consistent ?
 
-✅ Definition
-
 An index stores column values in an organized structure so the database can search efficiently.
 It maps each value to the location of the corresponding row in the table.
 Using this structure, the database quickly navigates to the required data instead of scanning all records.
@@ -283,19 +281,14 @@ When data is inserted, updated, or deleted, the index must also be updated so th
 OR (Intuitive Explanation)
 
 Indexing is like creating a tree structure that organizes data into branches based on indexed values, allowing the database to quickly navigate to the required record.
-
 Each branch helps narrow down where the data exists instead of searching everything.
-
 When data is added or deleted, the tree must also be updated by adding or removing branches so the structure continues to point to the correct records.
 
 🌳 Internal Structure
 
 The index structures index entries like a Binary Tree–type structure (usually a B-Tree), not the actual table data.
-
 Indexing must update on insert / delete / update because the index is a live mapping to data locations.
-
 Incorrect mappings would return wrong query results.
-
 When you create an index on id, the database builds a B-Tree using the id values as keys.
 
 ❓ Why update index when data is removed?
@@ -309,27 +302,22 @@ The index is a live map. When data disappears, the map must also forget that loc
 ➕ When data is INSERTED
 
 New row added:
-
 4 → row 4
 
 The database must add it to the index; otherwise searches cannot find it.
 
 ✅ Index is updated.
-
 ➖ When data is DELETED
 
 Suppose row with id = 2 is removed.
 
 Table now:
-
 1, 3, 4
 
 But index still says:
-
 2 → row 2   ❌ (row does not exist anymore)
 
 Now the database tries to access row 2 and finds nothing.
-
 So the database must remove 2 from the index.
 
 ✅ Index updated again.
@@ -341,7 +329,8 @@ Index must change whenever data changes, because it is a pointer list to the dat
 Insert → add pointer
 Delete → remove pointer
 Update → change pointer
-🔑 Final Mental Model
+
+
 Index = searchable tree
 Data change = tree update
 ---
